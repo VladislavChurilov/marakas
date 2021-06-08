@@ -25,7 +25,6 @@ const error = createReducer(null, {
 const isAuthenticated = createReducer(false, {
   [logIn.fulfilled]: () => true,
   [getCurrentProducts.fulfilled]: () => true,
-
   [logIn.rejected]: () => false,
   [getCurrentProducts.rejected]: () => false,
   [logOut.fulfilled]: () => false,

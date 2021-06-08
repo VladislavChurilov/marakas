@@ -47,13 +47,15 @@ export const logOut = createAsyncThunk(
 export const getCurrentProducts = createAsyncThunk(
   'auth/getCurrentProducts',
   async (_, { getState, rejectWithValue }) => {
-    const {
-      auth: { token: persistedToken },
-    } = getState();
-    if (!persistedToken) {
-      return;
+    const state = getState();
+    const persistedToken = state.auth.token;
+
+    if (persistedToken === null) {
+      return rejectWithValue();
     }
+
     token.set(persistedToken);
+
     try {
       const { data } = await axios.get(`products?`);
       return data;
